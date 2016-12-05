@@ -1,0 +1,1 @@
+ alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"SERVER-OTHER OpenSSH sshd identical blocks DoS attempt"; flow:to_server,established; content:"|00 03|"; depth:2; byte_test:4,>,200000,0,relative; metadata:policy max-detect-ips drop, service ssh; reference:bugtraq,20216; reference:cve,2006-4924; classtype:attempted-admin; sid:17317; rev:11;)
